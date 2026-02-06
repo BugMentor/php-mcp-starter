@@ -9,8 +9,10 @@ This document describes 15 manual test prompts for the MCP Sales Agent. Use them
 
 ## How to run
 
-1. **Start the server** (stdio):  
-   `php server.php`
+1. **Start the server** (stdio). Use the full path to PHP and `server.php` if PHP is not on PATH:
+   - **Windows (full path)**:  
+     `C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter\.php-runtime\php.exe C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter\server.php`
+   - Or with PHP on PATH: `php server.php`
 2. **Send one request per line** (JSON-RPC 2.0) on stdin. Each line is a JSON object; the server responds with one JSON object per request on stdout (except for notifications).
 3. **Optional script**: Use or extend `scripts/manual-15-prompts.php` to send all 15 prompts and print responses.
 
@@ -60,16 +62,17 @@ Copy these lines into a file or pipe to `php server.php`:
 {"jsonrpc":"2.0","method":"notifications/initialized"}
 ```
 
-Example (PowerShell):
+Example (PowerShell, full path):
 
 ```powershell
-Get-Content docs\manual-15-requests.txt | php server.php
+cd C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter
+Get-Content docs\manual-15-requests.txt | .\.php-runtime\php.exe server.php
 ```
 
-Or with the script (when available):
+Or with the script (full path):
 
-```bash
-php scripts/manual-15-prompts.php
+```powershell
+.\.php-runtime\php.exe scripts\manual-15-prompts.php
 ```
 
 ---

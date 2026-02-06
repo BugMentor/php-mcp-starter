@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "php-sales-agent": {
+      "type": "stdio",
+      "command": "C:/Users/matias.magni2/Documents/dev/mine/BugMentor/php-mcp-starter/.php-runtime/php.exe",
+      "args": ["C:/Users/matias.magni2/Documents/dev/mine/BugMentor/php-mcp-starter/server.php"],
+      "envFile": "C:/Users/matias.magni2/Documents/dev/mine/BugMentor/php-mcp-starter/.env"
+    }
+  }
+}

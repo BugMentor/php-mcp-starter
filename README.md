@@ -140,12 +140,30 @@ chmod +x server.php
 
 ### Claude Desktop
 
-Add the server to your Claude Desktop MCP config. Config file location:
+Add the server to your Claude Desktop MCP config.
+
+Config file location:
 
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`  
+  Full path: `C:\Users\matias.magni2\AppData\Roaming\Claude\claude_desktop_config.json`
 
-Example (replace the path with your actual path to `server.php`):
+**Windows (full paths):**
+
+```json
+{
+  "mcpServers": {
+    "php-sales-agent": {
+      "command": "C:\\Users\\matias.magni2\\Documents\\dev\\mine\\BugMentor\\php-mcp-starter\\.php-runtime\\php.exe",
+      "args": [
+        "C:\\Users\\matias.magni2\\Documents\\dev\\mine\\BugMentor\\php-mcp-starter\\server.php"
+      ]
+    }
+  }
+}
+```
+
+**macOS / Linux:**
 
 ```json
 {
@@ -160,34 +178,16 @@ Example (replace the path with your actual path to `server.php`):
 }
 ```
 
-**Windows** (use the path to your PHP executable and to `server.php`):
-
-```json
-{
-  "mcpServers": {
-    "php-sales-agent": {
-      "command": "C:\\path\\to\\php.exe",
-      "args": [
-        "C:\\path\\to\\php-mcp-starter\\server.php"
-      ]
-    }
-  }
-}
-```
-
 Restart Claude Desktop after changing the config.
 
 ### Cursor
 
-In Cursor, open **Settings → MCP** and add a server that runs the PHP script, for example:
+Project config is in `.cursor/mcp.json` with full paths.
 
-- **Command**: path to `php.exe` (Windows) or `php` (macOS/Linux)
-- **Args**: path to `server.php`
+Windows (full paths):
 
-Example for Windows:
-
-- Command: `C:\path\to\php.exe`
-- Args: `C:\path\to\php-mcp-starter\server.php`
+- **Command**: `C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter\.php-runtime\php.exe`
+- **Args**: `C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter\server.php`
 
 ---
 
@@ -212,10 +212,11 @@ Send one JSON-RPC request per line on stdin; responses are printed on stdout.
 echo '{"jsonrpc":"2.0","id":1,"method":"initialize"}' | php server.php
 ```
 
-**Windows (PowerShell):**
+**Windows (PowerShell, full path to PHP):**
 
 ```powershell
-'{"jsonrpc":"2.0","id":1,"method":"initialize"}' | php server.php
+cd C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter
+'{"jsonrpc":"2.0","id":1,"method":"initialize"}' | .\.php-runtime\php.exe server.php
 ```
 
 The server runs until stdin is closed (EOF). Logs and errors go to stderr so they do not interfere with JSON-RPC on stdout.
@@ -325,18 +326,20 @@ Uses the same PHP binary that runs the script (e.g. `PHP_BINARY`) to invoke manu
 php scripts/run-all-tests.php
 ```
 
-If `php` is not on your PATH, call it with the full path to your PHP executable, for example:
+If `php` is not on your PATH, use the full path to the portable PHP:
 
 ```powershell
-.\.php-runtime\php.exe scripts/run-all-tests.php
+cd C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter
+.\.php-runtime\php.exe scripts\run-all-tests.php
 ```
 
 ### One-off JSON-RPC request
 
-Pipe a single line to the server (then EOF):
+From project root (Windows, full path):
 
-```bash
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | php server.php
+```powershell
+cd C:\Users\matias.magni2\Documents\dev\mine\BugMentor\php-mcp-starter
+'{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | .\.php-runtime\php.exe server.php
 ```
 
 ### Requirements and notes
