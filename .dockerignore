@@ -1,0 +1,5 @@
+/vendor
+/.php-runtime
+/.git
+.env
+*.zip

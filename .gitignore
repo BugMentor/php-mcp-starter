@@ -1,0 +1,7 @@
+/vendor/
+/composer.lock
+.phpunit.cache/
+.php-runtime/
+.php-runtime.zip
+composer.phar
+.env
